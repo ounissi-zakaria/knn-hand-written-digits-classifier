@@ -1,8 +1,13 @@
 let mnist,predict,clear,answer
 const R = 10
 const K = 500
+
 function preload() {
-  mnist = loadTable("./data/mnist_train.csv")
+ mnist_parts = []
+//the data is split into 6 csv files each holding 10000 labelled image
+ for(let i = 1; i <= 6; i++){
+  mnist_parts[i-1] = loadTable("./data/split_mnist_train_"+i+".csv")
+}
 }
 
 function setup() {
@@ -16,7 +21,13 @@ function setup() {
   clear.mousePressed(clear_canvas)
   createElement("br")
   answer = createElement("h3","The answer is : "+"_")
-  mnist = mnist.getArray()
+
+//combining all the 6 parts into one array 
+  mnist = []
+  for(let i = 0; i < 6; i++){
+    mnist = mnist.concat(mnist_parts[i].getArray())
+  }
+
 }
 
 function draw() {
