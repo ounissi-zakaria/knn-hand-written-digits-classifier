@@ -1,6 +1,6 @@
 let mnist,predict,clear,answer
 const R = 10
-const K = 500
+const K = 1
 
 function preload() {
  mnist_parts = []
